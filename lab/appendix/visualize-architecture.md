@@ -1,5 +1,10 @@
 # Visualize the architecture
 
+- [`Draw.io`](#drawio)
+- [`PlantUML`](#plantuml)
+- [`Mermaid`](#mermaid)
+- [Other tools](#other-tools)
+
 > [!WARNING]
 > System architecture diagrams represent the system architecture but they are not the [system architecture](https://github.com/inno-se/the-guide?tab=readme-ov-file#architecture).
 
@@ -9,7 +14,12 @@ You can *prototype* diagrams in [`docs/diagrams/prototype`](../../docs/diagrams/
 
 However, it's not a good idea to version control images because you can't conveniently visualize their diffs and therefore can't track changes well.
 
-Therefore, you must use the [`diagrams as code`](https://simmering.dev/blog/diagrams/) approach and eventually switch to one of the following approaches.
+Therefore, you must use the [`diagrams as code`](https://simmering.dev/blog/diagrams/) approach and eventually switch to one of the following approaches:
+
+<!-- no toc -->
+- [`PlantUML`](#plantuml)
+- [`Mermaid`](#mermaid)
+- [Other tools](#other-tools)
 
 ## `PlantUML`
 

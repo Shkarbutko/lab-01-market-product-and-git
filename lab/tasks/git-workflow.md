@@ -15,16 +15,31 @@ Here's this workflow in the context of repos:
 
 Outline:
 
-- [Create an issue](#create-an-issue)
-- [Create a branch](#create-a-branch)
-  - [Create using `GitHub`](#create-using-github)
-  - [Create using the `Terminal`](#create-using-the-terminal)
-  - [Create using `GitLens`](#create-using-gitlens)
-- [Make commits](#make-commits)
-  - [Commit message format](#commit-message-format)
+- [Create a `Lab Task` issue](#create-a-lab-task-issue)
+- [Switch to the `main` branch](#switch-to-the-main-branch)
+  - [Switch to the `main` branch using the `Terminal`](#switch-to-the-main-branch-using-the-terminal)
+  - [Switch to the `main` branch using `GitLens`](#switch-to-the-main-branch-using-gitlens)
+- [Pull changes from `origin/main`](#pull-changes-from-originmain)
+  - [Pull changes from `origin/main` using the `Terminal`](#pull-changes-from-originmain-using-the-terminal)
+  - [Pull changes from `origin/main` using `GitLens`](#pull-changes-from-originmain-using-gitlens)
+- [Resolve conflicts](#resolve-conflicts)
+  - [Pull and rebase using `GitLens`](#pull-and-rebase-using-gitlens)
+  - [Resolve conflicts using `GitLens`](#resolve-conflicts-using-gitlens)
+- [Switch to a new branch](#switch-to-a-new-branch)
+  - [Switch to a new branch using `GitHub`](#switch-to-a-new-branch-using-github)
+  - [Switch to a new branch using the `Terminal`](#switch-to-a-new-branch-using-the-terminal)
+  - [Switch to a new branch using `GitLens`](#switch-to-a-new-branch-using-gitlens)
+- [Edit files](#edit-files)
+- [Commit](#commit)
   - [Commit using the `Terminal`](#commit-using-the-terminal)
   - [Commit using `Source Control`](#commit-using-source-control)
   - [Commit using `Source Control` (specific changes)](#commit-using-source-control-specific-changes)
+    - [Stage specific changes](#stage-specific-changes)
+    - [(Optional) Unstage specific changes](#optional-unstage-specific-changes)
+    - [Commit staged changes](#commit-staged-changes)
+- [(Optional) Undo commits](#optional-undo-commits)
+  - [Undo commits using the `Terminal`](#undo-commits-using-the-terminal)
+  - [Undo commits using `GitLens`](#undo-commits-using-gitlens)
 - [Publish the branch](#publish-the-branch)
   - [Publish using the `Terminal`](#publish-using-the-terminal)
   - [Publish using `GitLens`](#publish-using-gitlens)
@@ -43,72 +58,184 @@ Outline:
     - [As a PR author](#as-a-pr-author)
 - [Merge the PR](#merge-the-pr)
 - [Clean up](#clean-up)
-- [Pull changes](#pull-changes)
-  - [Pull using the `Terminal`](#pull-using-the-terminal)
-  - [Pull using `GitLens`](#pull-using-gitlens)
 
-## Create an issue
+## Create a `Lab Task` issue
 
-[Create](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue) a `GitHub` issue in your forked repo using the `Lab Task` [issue form](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms) (defined in [`.github/ISSUE_TEMPLATE/01-task.yml`](../../.github/ISSUE_TEMPLATE/01-task.yml)).
+1. Go to your fork on `GitHub`.
+2. [Create](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue) an issue.
+3. Click `Lab Task` when asked about the issue type.
 
-## Create a branch
+> [!NOTE]
+> What you see when creating an issue is described using an [issue form](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms).
+>
+> There is an issue form in [`.github/ISSUE_TEMPLATE/01-task.yml`](../../.github/ISSUE_TEMPLATE/01-task.yml).
 
-Create a new branch for the issue using one of these ways:
+## Switch to the `main` branch
 
-### Create using `GitHub`
+Go to `VS Code`.
 
-1. [Create a branch](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-a-branch-for-an-issue).
-1. Copy the command.
-1. [Open the `Terminal`](../appendix/vs-code.md#open-the-terminal).
-1. Paste the command to the `Terminal`.
-1. Press `Enter` to run the command.
+Switch to the `main` branch using any of these approaches:
 
-### Create using the `Terminal`
+- [Switch to the `main` branch using the `Terminal`](#switch-to-the-main-branch-using-the-terminal)
+- [Switch to the `main` branch using `GitLens`](#switch-to-the-main-branch-using-gitlens)
 
-1. [Open the `Terminal`](../appendix/vs-code.md#open-the-terminal).
-2. [Run](../appendix/vs-code.md#run-a-command-using-the-terminal):
+### Switch to the `main` branch using the `Terminal`
 
-    ```console
+1. [Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
+
+   ```terminal
+   git switch main
+   ```
+
+### Switch to the `main` branch using `GitLens`
+
+1. [Run using the `Command Palette`](../appendix/vs-code.md#run-a-command-using-the-command-palette): `GitLens: Git Switch to...`.
+2. Select the `main` branch (e.g., using `UpArrow` and `DownArrow` on your keyboard).
+3. Press `Enter` to confirm.
+
+## Pull changes from `origin/main`
+
+Pull changes from the `main` branch in your fork on `GitHub`.
+
+We call that branch `origin/main`.
+
+### Pull changes from `origin/main` using the `Terminal`
+
+1. [Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
+
+   ```terminal
+   git pull origin main
+   ```
+
+### Pull changes from `origin/main` using `GitLens`
+
+1. [Run using the `Command Palette`](../appendix/vs-code.md#run-a-command-using-the-command-palette): `GitLens: Pull`
+
+## Resolve conflicts
+
+You may see some errors and messages about conflicts after pulling.
+
+It may happen that commits on your `origin/main` are different from commits on your local `main` branch in your cloned repo on your computer.
+
+You can see that in the [`Status Bar`](../appendix/vs-code.md#status-bar).
+
+<img alt="Commit Conflict" src="../images/appendix/vs-code/status-bar-commit-conflict.png" style="width:400px"></img>
+
+You need to pull commits from `origin/main` into your local `main`.
+
+These commits from `origin/main` will find a place somewhere among the commits on your local `main`.
+
+However, you can get conflicts if commits from `origin/main` modified the same lines of text in files as your local commits but in a different way.
+
+In this case, you should rebase your local branch and resolve conflicts:
+
+- [Pull and rebase using `GitLens`](#pull-and-rebase-using-gitlens)
+- [Resolve conflicts using `GitLens`](#resolve-conflicts-using-gitlens)
+
+### Pull and rebase using `GitLens`
+
+When you rebase, your local commits are placed on top of the commits from `origin/main`.
+
+1. [Run using the `Command Palette`](../appendix/vs-code.md#run-a-command-using-the-command-palette): `GitLens: Pull`.
+2. Select `Pull with Rebase` (e.g., using `UpArrow` and `DownArrow` on your keyboard).
+3. Press `Enter` to confirm.
+4. You're done if `GitLens` doesn't show any error.
+
+### Resolve conflicts using `GitLens`
+
+Continue resolving conflicts if you see an error like this:
+
+<img alt="Pull Error" src="../images/appendix/gitlens/pull-error.png" style="width:400px"></img>
+
+1. [Open the `Source Control`](../appendix/vs-code.md#open-the-source-control).
+2. Go to `Merge Changes`.
+3. Click a file.
+4. Click `Resolve in Merge Editor`.
+5. Accept changes that you like more.
+6. Click `Complete Merge`.
+7. [Open the `Source Control`](../appendix/vs-code.md#open-the-source-control).
+8. Click `Continue`.
+9. This should be resolved.
+10. There may be other conflicts.
+11. `VS Code` can show something like `Rebasing (1/3)` and `Cancel`.
+12. Click that `Cancel`.
+13. Repeat steps.
+
+## Switch to a new branch
+
+Create a new branch and switch to it using any of these approaches:
+
+<!-- no toc -->
+- [Switch to a new branch using `GitHub`](#switch-to-a-new-branch-using-github)
+- [Switch to a new branch using the `Terminal`](#switch-to-a-new-branch-using-the-terminal)
+- [Switch to a new branch using `GitLens`](#switch-to-a-new-branch-using-gitlens)
+
+> [!IMPORTANT]
+> Replace the `<branch-name>` with the actual branch name.
+
+### Switch to a new branch using `GitHub`
+
+1. Go to your fork on `GitHub`.
+2. [Create a branch](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-a-branch-for-an-issue).
+3. Copy the command provided by `GitHub`. It's something like:
+
+   ```terminal
+   git fetch origin
+   git checkout <branch-name>
+   ```
+
+4. [Run the copied command using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal).
+
+### Switch to a new branch using the `Terminal`
+
+1. [Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
+
+    ```terminal
     git checkout -b <branch-name>
     ```
 
-> [!IMPORTANT]
-> Replace `<branch-name>` with an actual branch name in all subsequent commands.
+### Switch to a new branch using `GitLens`
 
-### Create using `GitLens`
+1. [Run using the `Command Palette`](../appendix/vs-code.md#run-a-command-using-the-command-palette): `GitLens: Git Create Branch...`.
+2. Select `main` as the base branch (e.g., using `UpArrow` and `DownArrow` on your keyboard).
+3. Press `Enter` to confirm.
+4. Write `<branch-name>` to provide the new branch name.
+5. Press `Enter` to confirm.
+6. `Select Create & Switch to Branch` (e.g., using `UpArrow` and `DownArrow` on your keyboard).
+7. Press `Enter` to confirm.
 
-1. [Open the `Command Palette`](../appendix/vs-code.md#open-the-command-palette).
-2. Run `GitLens: Git Create Branch...`.
-3. Select `main` as the base branch (e.g., using `UpArrow` and `DownArrow` on your keyboard).
-4. Press `Enter` to confirm.
-5. Write `<branch-name>` to provide the new branch name.
-6. Press `Enter` to confirm.
-7. `Select Create & Switch to Branch` (e.g., using `UpArrow` and `DownArrow` on your keyboard).
-8. Press `Enter` to confirm.
+## Edit files
 
-## Make commits
+Edit files in the [`Editor`](../appendix/vs-code.md#editor) to produce changes.
 
-Make commits to that branch to complete the task.
+## Commit
 
-### Commit message format
+Commit changes to the `<branch-name>` to complete the task.
 
-Format: `type: short description`
+> ![NOTE]
+> Commit message format is: `type: short description`
+>
+> Common types:
+>
+> - `fix:` — bug fixes
+> - `feat:` — additions (e.g., new feature)
+> - `docs:` — documentation changes
 
-Common types:
+Commit using any of these approaches:
 
-- `docs:` — documentation changes (most common in this lab)
-- `feat:` — new functionality
-- `fix:` — bug fixes
+- [Commit using the `Terminal`](#commit-using-the-terminal)
+- [Commit using `Source Control`](#commit-using-source-control)
+- [Commit using `Source Control` (specific changes)](#commit-using-source-control-specific-changes)
 
 ### Commit using the `Terminal`
 
 1. Open the [`Terminal`](../appendix/vs-code.md#open-the-terminal).
 2. Run:
 
-   ```console
+   ```terminal
    git add <file>
    # example: git add README.md
-   # example (spaces): git add 'path/some image.svg'
+   # example (path with spaces): git add 'path/some image.svg'
    
    git commit -m '<type>: <short description>'
    # example: git commit -m 'docs: add architecture diagram'
@@ -120,10 +247,18 @@ Common types:
 2. Go to `Changes`.
 3. Hover over a file name.
 4. Click `+` to stage the file.
-5. Type commit message, e.g., `docs: add architecture diagram`.
+5. Write a commit message, e.g., `docs: add architecture diagram`.
 6. Click `Commit`.
 
 ### Commit using `Source Control` (specific changes)
+
+Complete these steps:
+
+- [Stage specific changes](#stage-specific-changes)
+- [(Optional) Unstage specific changes](#optional-unstage-specific-changes)
+- [Commit staged changes](#commit-staged-changes)
+
+#### Stage specific changes
 
 1. [Open the `Source Control`](../appendix/vs-code.md#open-the-source-control).
 2. Go to `Changes`.
@@ -131,18 +266,65 @@ Common types:
 4. Select changed lines in the editor (red-green).
 5. Right mouse click the selected lines.
 6. Click `Stage Selected Ranges`.
-7. Go to `Changes`.
-8. Write a commit message.
-9. Click `Commit`.
+
+#### (Optional) Unstage specific changes
+
+1. [Open the `Source Control`](../appendix/vs-code.md#open-the-source-control).
+2. Go to `Staged Changes`.
+3. Click a file.
+4. Select changed lines in the editor (red-green).
+5. Right mouse click the selected lines.
+6. Click `Unstage Selected Ranges`.
+
+#### Commit staged changes
+
+1. [Open the `Source Control`](../appendix/vs-code.md#open-the-source-control).
+2. Write a commit message.
+3. Click `Commit`.
+
+## (Optional) Undo commits
+
+> [!NOTE]
+> There can appear a conflict when you try to undo.
+
+Undo commits using any of these approaches:
+
+- [Undo commits using the `Terminal`](#undo-commits-using-the-terminal)
+- [Undo commits using `GitLens`](#undo-commits-using-gitlens)
+
+### Undo commits using the `Terminal`
+
+[Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
+
+```terminal
+git reset --soft HEAD~1
+```
+
+Your changes are staged now.
+
+You can stage more changes.
+
+```terminal
+git add some-file
+```
+
+Then, you can commit using the previous message.
+
+```terminal
+git commit -C ORIG_HEAD
+```
+
+### Undo commits using `GitLens`
+
+See [Undo commit on the current branch](../appendix/gitlens.md#undo-a-commit-on-the-current-branch).
 
 ## Publish the branch
 
 ### Publish using the `Terminal`
 
-1. [Open the `Terminal`](../appendix/vs-code.md#open-the-terminal).
-1. Run:
+1. [Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
 
-   ```console
+   ```terminal
    git push -u origin <branch-name>
    ```
 
@@ -158,10 +340,9 @@ Common types:
 
 ### Push using the `Terminal`
 
-1. [Open the `Terminal`](../appendix/vs-code.md#open-the-terminal).
-2. Run:
+1. [Run using the `Terminal`](../appendix/vs-code.md#run-a-command-using-the-terminal):
 
-   ```console
+   ```terminal
    git push
    ```
 
@@ -174,11 +355,23 @@ Common types:
 
 ## Create a PR
 
-Create a PR to the `main` branch via [`GitHub`](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request#creating-the-pull-request) or via the [`GitHub Pull Requests` extension](https://code.visualstudio.com/docs/sourcecontrol/github#_creating-pull-requests).
+Create a PR to the `main` branch **of your fork**.
+
+Complete these steps:
+
+- [Open the PR editor using `GitHub`](#open-the-pr-editor-using-github)
+- [Finish creating a PR](#finish-creating-a-pr)
+
+> [!TIP]
+> You can also [create a PR using  `GitHub Pull Requests` extension](https://code.visualstudio.com/docs/sourcecontrol/github#_creating-pull-requests).
 
 ### Open the PR editor using `GitHub`
 
-Open the PR editor using one of the following methods.
+Open the PR editor using any of these approaches:
+
+- [Open the PR editor using a button](#open-the-pr-editor-using-a-button)
+- [Open the PR editor using `Pull requests`](#open-the-pr-editor-using-pull-requests)
+- [Open the PR editor using the branch list](#open-the-pr-editor-using-the-branch-list)
 
 #### Open the PR editor using a button
 
@@ -189,14 +382,14 @@ If you see the `Compare & pull request` button, click it.
 #### Open the PR editor using `Pull requests`
 
 1. Go to your fork on `GitHub`.
-1. Click `Pull requests`.
-1. Click `New pull request`.
-1. Click `base repository: <your-username>/lab-01-market-product-and-git`.
-1. Click `<your-username>/lab-01-market-product-and-git` to select the base repo.
-1. The PR will be created in your repo with `main` as the base branch.
-1. Click `compare: main` to choose a branch to compare with the base.
-1. Click `<branch-name>`.
-1. Click `Create pull request`.
+2. Click `Pull requests`.
+3. Click `New pull request`.
+4. Click `base repository: <your-username>/lab-01-market-product-and-git`.
+5. Click `<your-username>/lab-01-market-product-and-git` to select the base repo.
+6. The PR will be created in your repo with `main` as the base branch.
+7. Click `compare: main` to choose a branch to compare with the base.
+8. Click `<branch-name>`.
+9. Click `Create pull request`.
 
 #### Open the PR editor using the branch list
 
@@ -208,7 +401,9 @@ If you see the `Compare & pull request` button, click it.
 
 ### Finish creating a PR
 
-1. Write the PR title (`Add @<your-username> to contributors`).
+1. Write the PR title.
+
+   Example: `Solve task 1`.
 2. Write the PR description.
 3. [Link the PR](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) to the issue, e.g. `Closes #<issue number>`.
 4. Check the boxes.
@@ -244,33 +439,3 @@ Click `Merge pull request`.
 Close the issue.
 
 Delete the PR branch.
-
-## Pull changes
-
-### Pull using the `Terminal`
-
-1. [Open the `Terminal`](../appendix/vs-code.md#open-the-terminal).
-1. Switch to `main`:
-
-   ```console
-   git switch main
-   ```
-
-1. Pull changes:
-
-   ```console
-   git pull
-   ```
-
-### Pull using `GitLens`
-
-Switch to `main`:
-
-1. Go to the [`Status Bar`](../appendix/vs-code.md#status-bar).
-2. Click the `<branch-name>`.
-3. Click `main`.
-
-Synchronize changes:
-
-1. Go to the [`Status Bar`](../appendix/vs-code.md#status-bar).
-2. Click the `Synchronize Changes` icon to the right of `<branch-name>`.
